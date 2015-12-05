@@ -32,18 +32,12 @@ type GameResource = {
   Loser : string
 }
 
-
 type State = {
                Players: PlayerResource list;
                NextPlayerId: int;
                Games: GameResource list;
                NextGameId: int
              }
-
-module Model =
-
-    let initialState = { Players = []; NextPlayerId = 1; Games = []; NextGameId = 1 }
-
 
 
 [<AutoOpen>]
@@ -88,11 +82,8 @@ module Player =
 
 
 
-
-
 [<AutoOpen>]
 module Game =
-
     let getGameById id = Seq.tryFind (fun (g: GameResource) -> g.Id = id)
 
     let removeGame id = List.filter (fun (g: GameResource) -> g.Id <> id)
@@ -118,8 +109,7 @@ module Game =
 
 
 
-
-let model = new CQAgent<State>(Model.initialState)
+let model = new CQAgent<State>({ Players = []; NextPlayerId = 1; Games = []; NextGameId = 1 })
 
 Player.Create model { Id = 0; Name="Sandra"; Points=1100; Retired=true }    |> ignore
 Player.Create model { Id = 0; Name="Richard"; Points=1100; Retired=false }  |> ignore
@@ -145,10 +135,10 @@ let PlayerRoutes = choose [
                         ]
 
 let GameRoutes = choose [
-                        Get "games" (Player.GetAll model)
-                        GetById "games" (Player.GetItem model)
-                        Post "games" (Player.Create model)
-                        Delete "games" (Player.DeleteItem model)
+                        Get "games" (Game.GetAll model)
+                        GetById "games" (Game.GetItem model)
+                        Post "games" (Game.Create model)
+                        Delete "games" (Game.DeleteItem model)
                         ]
 
 
