@@ -122,6 +122,7 @@ Game.Create model { Id = 0; Winner="Sandra"; Loser="Richard" }              |> i
 Game.Create model { Id = 0; Winner="Tom"; Loser="Jane" }                    |> ignore
 Game.Create model { Id = 0; Winner="Mary"; Loser="Harry" }                  |> ignore
 Game.Create model { Id = 0; Winner="Richard"; Loser="Harry" }               |> ignore
+Game.Create model { Id = 0; Winner="Richard"; Loser="Sandra" }              |> ignore
 
 
 
